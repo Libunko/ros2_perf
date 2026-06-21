@@ -95,7 +95,7 @@ OPTIONS (may appear before, after, or in between MODE keywords):
 | `--version` | print version and exit 0 |
 | `-t NAME` | data topic name (default `/ros2_perf`; ping/pong derive `_ping` / `_pong`) |
 | `-u` | best-effort instead of reliable |
-| `-k all\|N` | keep-all or keep-last-N history (default 10) |
+| `-k all\|N` | keep-all or keep-last-N history (default `all`) |
 | `-D DUR` | run at most DUR seconds (default: forever) |
 | `-L` | enable intra-process communication (disabled for waitset triggers) |
 | `-l` | sub reports one-way latency |

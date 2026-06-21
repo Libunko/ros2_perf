@@ -202,6 +202,14 @@ TEST(Args, OptionsAndModesInterleave)
   EXPECT_EQ(o.pr.cfg.modes[1].kind, ros2_perf::ModeKind::kSub);
 }
 
+TEST(Args, DefaultKeepAll)
+{
+  auto o = run_parse({"sub"});
+  ASSERT_EQ(o.pr.status, ros2_perf::ParseResult::Status::kOk);
+  EXPECT_EQ(o.pr.cfg.keep_mode, ros2_perf::KeepMode::kKeepAll);
+  EXPECT_EQ(o.pr.cfg.keep_depth, 0u);
+}
+
 TEST(Args, BestEffortAndKeepAll)
 {
   auto o = run_parse({"-u", "-k", "all", "sub"});

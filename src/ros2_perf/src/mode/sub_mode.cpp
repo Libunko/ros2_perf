@@ -93,10 +93,6 @@ private:
 void PubRegistry::apply_seq_gap(PubTrack & track, uint64_t seq)
 {
   if (seq <= track.last_seq) {
-    std::printf(
-      "seq <= track.last_seq: %lu <= %lu\n", static_cast<unsigned long>(seq),
-      static_cast<unsigned long>(track.last_seq));
-    std::fflush(stdout);
     return;
   }
   const uint64_t diff = seq - track.last_seq - 1;

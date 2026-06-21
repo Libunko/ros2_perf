@@ -126,9 +126,8 @@ TEST(LatencyStat, WindowResets)
 
 TEST(LatencyStat, TotalCapDropsLateSamples)
 {
-  // Document the current behavior: once the total buffer is full,
-  // additional samples are dropped from the percentile pool (but mean
-  // / stddev / min / max keep tracking all samples via Welford).
+  // Once the total buffer is full, additional samples are dropped;
+  // all summary fields reflect only the stored (capped) samples.
   ros2_perf::LatencyStat ls(/*total_cap=*/4, /*window_cap=*/4);
   add_all(ls, {1, 2, 3, 4, 1000, 1000});
   auto s = ls.summary_total();

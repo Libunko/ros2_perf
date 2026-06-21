@@ -51,8 +51,8 @@ public:
 
     if (args_.rate_hz > 0.0) {
       const uint32_t burst = std::max(1u, args_.burst);
-      double msg_rate_hz_ = args_.rate_hz * static_cast<double>(burst);
-      interval_ns_ = static_cast<int64_t>(std::llround(1e9 / msg_rate_hz_));
+      const double msg_rate_hz_ = args_.rate_hz * static_cast<double>(burst);
+      interval_ns_ = std::max<int64_t>(1, static_cast<int64_t>(std::llround(1e9 / msg_rate_hz_)));
     }
   }
 

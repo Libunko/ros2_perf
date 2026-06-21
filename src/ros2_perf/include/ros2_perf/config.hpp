@@ -103,9 +103,6 @@ struct Config
   int32_t domain_id = -1;
 
   ExecutorKind executor = ExecutorKind::kMulti;
-
-  // If true, main just prints help and exits 0.
-  bool print_help = false;
 };
 
 }  // namespace ros2_perf

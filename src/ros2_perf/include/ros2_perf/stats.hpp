@@ -24,19 +24,16 @@ namespace ros2_perf
 {
 
 // Online statistics for a stream of latency samples in nanoseconds.
-// Mean / standard deviation are accumulated incrementally with Welford's
-// algorithm (constant-time per add). Percentiles are computed on demand
-// by sorting a copy of the relevant sample buffer.
+// Mean, stddev, min, max, and percentiles are computed on demand from
+// stored samples via Welford's algorithm plus a single sort.
 //
 // Two sample buffers are maintained:
 //   * total:   capped at total_cap (default 200k) so memory stays
 //              bounded on long runs. Once the cap is reached, additional
-//              samples are dropped (i.e. summary percentiles describe
-//              the FIRST total_cap samples); a future change may swap
-//              this for reservoir sampling. The mean / stddev / min /
-//              max are computed over ALL samples regardless of cap.
-//   * window:  cleared at every print interval; used for the per-second
-//              percentile line.
+//              samples are dropped; summary stats describe only the
+//              stored samples (the first total_cap received).
+//   * window:  capped at window_cap; cleared at every print interval;
+//              used for the per-second percentile line.
 //
 // The lock is taken on each add(). Hot-path use is fine because lat data
 // only updates once per received message, not per-byte.

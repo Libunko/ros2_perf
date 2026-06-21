@@ -131,10 +131,18 @@ int main(int argc, char ** argv)
 {
   int consumed = argc;
   auto pr = ros2_perf::parse_args(argc, argv, &consumed);
+  if (pr.status == ros2_perf::ParseResult::Status::kHelp) {
+    std::fputs(ros2_perf::usage_text().c_str(), stdout);
+    return EXIT_SUCCESS;
+  }
+  if (pr.status == ros2_perf::ParseResult::Status::kVersion) {
+    std::printf("ros2_perf %s\n", ros2_perf::kVersion);
+    return EXIT_SUCCESS;
+  }
   if (pr.status != ros2_perf::ParseResult::Status::kOk) {
     std::fprintf(stderr, "ros2_perf: %s\n\n", pr.error.c_str());
     std::fputs(ros2_perf::usage_text().c_str(), stderr);
-    return EXIT_FAILURE;
+    return 3;
   }
 
   const ros2_perf::Config & cfg = pr.cfg;

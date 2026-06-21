@@ -490,7 +490,7 @@ std::string usage_text()
        "  -t NAME       data topic name (default: /ros2_perf;\n"
        "                ping/pong derive /ros2_perf_ping, /ros2_perf_pong)\n"
        "  -u            best-effort instead of reliable\n"
-       "  -k all|N      keep-all or keep-last-N history (default: 10)\n"
+       "  -k all|N      keep-all or keep-last-N history (default: all)\n"
        "  -D DUR        run for at most DUR seconds (default: forever)\n"
        "  -L            allow same-process matching (intra-process comms)\n"
        "                (silently disabled for waitset-triggered modes)\n"
